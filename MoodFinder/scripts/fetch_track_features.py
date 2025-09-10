@@ -37,6 +37,7 @@ for track in tracks['items']:
     response = requests.get(url, headers=headers)
     result = response.json()
 
+    # Extract relevant features
     features = {
         'id': track_id,
         'name': track_name,
@@ -49,5 +50,9 @@ for track in tracks['items']:
         'tempo': result.get('tempo'),
         'loudness': result.get('loudness')
     }
-    print(features)
-    print()
+
+    # Export features to CSV
+    with open('MoodFinder/data/track_features.csv', 'a') as f:
+        if f.tell() == 0:
+            f.write('id,name,artist,happiness,danceability,acousticness,mode,energy,tempo,loudness\n')
+        f.write(f"{features['id']},{features['name']},{features['artist']},{features['happiness']},{features['danceability']},{features['acousticness']},{features['mode']},{features['energy']},{features['tempo']},{features['loudness']}\n")
