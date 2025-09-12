@@ -18,8 +18,8 @@ sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=client_id, 
 tracks = sp.playlist_items(playlist_id)
 
 # Set CSV header
-with open('MoodFinder/data/track_features.csv', 'w') as f:
-    f.write('id,name,artist,happiness,danceability,acousticness,mode,energy,tempo,loudness\n')
+with open('MoodPredictor/data/track_features.csv', 'w') as f:
+    f.write('name,artist,happiness,danceability,acousticness,mode,energy,tempo,loudness\n')
 
 # Use RapidAPI Track Analyzer to fetch audio features
 # Valence: Happiness, Danceability, Acousticness, Mode
@@ -55,5 +55,5 @@ for track in tracks['items']:
     }
 
     # Export features to CSV
-    with open('MoodFinder/data/track_features.csv', 'a') as f:
-        f.write(f"{features['id']},{features['name']},{features['artist']},{features['happiness']},{features['danceability']},{features['acousticness']},{features['mode']},{features['energy']},{features['tempo']},{features['loudness']}\n")
+    with open('MoodPredictor/data/track_features.csv', 'a') as f:
+        f.write(f"{features['name']},{features['artist']},{features['happiness']},{features['danceability']},{features['acousticness']},{features['mode']},{features['energy']},{features['tempo']},{features['loudness']}\n")
